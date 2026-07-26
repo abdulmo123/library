@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="book.js" defer></script>
+</head>
+
+<body>
+    <h1>Library</h1>
+    <div class="container">
+        <div id="modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                    <label for="title">Title</label>
+                    <input type="text" class="title" id="title" required>
+
+                    <label for="author">Author</label>
+                    <input type="text" class="author" id="author" required>
+
+                    <label for="pages"># of Pages</label>
+                    <input type="number" class="pages" id="pages" required>
+
+                    <label for="read">Read?</label>
+                    <select name="read" id="read">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+
+                    <input class="submit" type="submit" value="Submit">
+                </form>
+            </div>
+
+        </div>
+        <div class="add">
+            <button id="btn">Add Book</button>
+        </div>
+        <div class="table">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th># Pages</th>
+                    <th>Read?</th>
+                </tr>
+                <!-- <tr>
+                    <td>
+                        <div class="action-btns">
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </div>
+                    </td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                    <td>Mexico</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                    <td>Mexico</td>
+                </tr> -->
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
