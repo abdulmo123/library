@@ -22,29 +22,29 @@ function addBookToLibrary(id, title, author, numPages, isRead) {
     library.push(book);
 }
 
-var modal = document.getElementById("modal");
-var btn = document.getElementById("btn");
-var span = document.querySelector(".close");
-var submit = document.querySelector(".submit");
+var addModal = document.getElementById("add-modal");
+var addBtn = document.getElementById("add-btn");
+var addClose = document.querySelector(".add-close");
+var addSubmit = document.querySelector(".add-submit");
 
 
 // When the user clicks the button, open the modal 
-btn.onclick = function () {
-    modal.style.display = "block";
+addBtn.onclick = function () {
+    addModal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
+addClose.onclick = function () {
+    addModal.style.display = "none";
 }
 
 // close modal on submit click
-submit.onclick = function () {
-    modal.style.display = "none";
+addSubmit.onclick = function () {
+    addModal.style.display = "none";
 }
 
-const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
+const addForm = document.querySelector('.add-form');
+addForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const id = crypto.randomUUID();
@@ -62,6 +62,39 @@ form.addEventListener('submit', (e) => {
     }
 })
 
+const editForm = document.getElementById('edit-form');
+editForm.addEventListener('submit', (e) => {
+    const oldId = editForm.classList[0].substring(10);
+    e.preventDefault();
+
+    // get the values from the input form
+    const newId = crypto.randomUUID();
+    const title = editForm.querySelector('input#title').value;
+    const author = editForm.querySelector('input#author').value;
+    const pages = editForm.querySelector('input#pages').valueAsNumber;
+    const read = editForm.querySelector('select#read').value;
+
+    // find and update book object in library list
+    const book = library.find(obj => obj.id === oldId)
+    console.log('book ===>', book);
+    book.title = title;
+    book.author = author;
+    book.numPages = pages;
+    book.isRead = read.toUpperCase();
+
+    // update the textContent in the DOM td
+    const titleTd = document.querySelector(`.title-${oldId}`);
+    const authorTd = document.querySelector(`.author-${oldId}`);
+    const numPagesTd = document.querySelector(`.pages-${oldId}`);
+    const readTd = document.querySelector(`.read-${oldId}`);
+
+    titleTd.textContent = title;
+    authorTd.textContent = author;
+    numPagesTd.textContent = pages;
+    readTd.textContent = read.toUpperCase();
+
+})
+
 function addBookToTable(id, title, author, pages, read) {
     const table = document.querySelector('table');
     const tr = document.createElement('tr');
@@ -70,9 +103,13 @@ function addBookToTable(id, title, author, pages, read) {
     // td items for each column
     const actionTdBtns = document.createElement('td');
     const titleTd = document.createElement('td');
+    titleTd.classList.add(`title-${id}`);
     const authorTd = document.createElement('td');
+    authorTd.classList.add(`author-${id}`);
     const numPagesTd = document.createElement('td');
+    numPagesTd.classList.add(`pages-${id}`);
     const readTd = document.createElement('td');
+    readTd.classList.add(`read-${id}`);
 
     titleTd.textContent = title;
     authorTd.textContent = author;
@@ -88,6 +125,7 @@ function addBookToTable(id, title, author, pages, read) {
     editBtn.textContent = 'Edit';
     editBtn.classList.add('edit');
     editBtn.dataset.id = id;
+    editBtn.id = 'edit-btn';
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
@@ -129,10 +167,42 @@ function deleteBookItem(id) {
 }
 
 function editBookItem(id) {
-    console.log('id to EDIT ...', id);
-    // TODO: modal popup (preferably with pre-populated fields)
+    // get edit modal and related elements
+    var editModal = document.getElementById("edit-modal");
+    var editBtn = document.getElementById("edit-btn");
+    const editForm = document.querySelector('#edit-form');
+    editForm.classList.replace('edit-form', `edit-form-${id}`);
+    var editClose = document.querySelector(".edit-close");
+    var editSubmit = document.querySelector(".edit-submit");
 
-    // TODO: go thru with updated modal values and set book object to updated values
+
+    // When the user clicks the button, open the modal 
+    editBtn.onclick = function () {
+        editModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    editClose.onclick = function () {
+        editModal.style.display = "none";
+    }
+
+    // close modal on submit click
+    editSubmit.onclick = function () {
+        editModal.style.display = "none";
+    }
+
+    // grab inputs on the edit modal form
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+    const readInput = document.getElementById('read');
+
+    // pull up the preserved data to display
+    const obj = library.find(book => book.id === id);
+    titleInput.value = obj.title;
+    authorInput.value = obj.author;
+    pagesInput.valueAsNumber = obj.numPages;
+    readInput.value = obj.isRead;
 }
 
 // event listener for edit/delete btn of each row

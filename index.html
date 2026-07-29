@@ -12,12 +12,13 @@
 <body>
     <h1>Library</h1>
     <div class="container">
-        <div id="modal" class="modal">
+        <!-- Add Modal -->
+        <div id="add-modal" class="add-modal">
 
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <form>
+                <span class="add-close">&times;</span>
+                <form class="add-form">
                     <label for="title">Title</label>
                     <input type="text" class="title" id="title">
 
@@ -33,13 +34,39 @@
                         <option value="no">No</option>
                     </select>
 
-                    <button class="submit" type="submit">Submit</button>
+                    <button class="add-submit" type="submit">Submit</button>
                 </form>
             </div>
+        </div>
 
+        <!-- Edit Modal -->
+        <div id="edit-modal" class="edit-modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="edit-close">&times;</span>
+                <form id="edit-form" class="edit-form">
+                    <label for="title">Title</label>
+                    <input type="text" class="title" id="title">
+
+                    <label for="author">Author</label>
+                    <input type="text" class="author" id="author">
+
+                    <label for="pages"># of Pages</label>
+                    <input type="number" class="pages" id="pages">
+
+                    <label for="read">Read?</label>
+                    <select name="read" id="read">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+
+                    <button class="edit-submit" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
         <div class="add">
-            <button id="btn">Add Book</button>
+            <button id="add-btn">Add Book</button>
         </div>
         <div class="table">
             <table>
